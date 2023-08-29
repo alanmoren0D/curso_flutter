@@ -13,7 +13,8 @@ class Square
   double _side;
   
   Square({ required double side })
-    : _side = side;
+    : assert(side >= 0, 'Value of side must be a positive number'),
+      _side = side;
   
    double get area
   {
@@ -23,7 +24,7 @@ class Square
   set side(double value)
   {
     print('setting new value $value');
-    if(value < 0) throw 'Value must be a positive number';
+    if(value < 0) throw 'Value of side must be a positive number';
     _side = value;
   }
   
