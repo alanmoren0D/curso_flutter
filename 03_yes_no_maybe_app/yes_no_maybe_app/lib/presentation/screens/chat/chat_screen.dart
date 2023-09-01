@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yes_no_maybe_app/presentation/widget/chat/her_message_bubble.dart';
 import 'package:yes_no_maybe_app/presentation/widget/chat/my_message_bubble.dart';
+import 'package:yes_no_maybe_app/presentation/widget/shared/message_field_box.dart';
  
  class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -51,7 +52,7 @@ class SafeArea extends StatelessWidget {
             }
           )
           ),
-          const Text('holalsad')
+          const MessageFieldBox()
         ],
       ),
     );
