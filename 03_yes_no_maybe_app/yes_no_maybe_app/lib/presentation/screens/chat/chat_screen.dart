@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yes_no_maybe_app/domain/entities/message.dart';
+import 'package:yes_no_maybe_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_maybe_app/presentation/widget/chat/her_message_bubble.dart';
 import 'package:yes_no_maybe_app/presentation/widget/chat/my_message_bubble.dart';
 import 'package:yes_no_maybe_app/presentation/widget/shared/message_field_box.dart';
@@ -37,22 +40,35 @@ class SafeArea extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) 
+  {
+    final chatProvider=context.watch<ChatProvider>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        children: [
-          Expanded(child: ListView.builder(
-            itemCount: 100,
-            itemBuilder: (context, index)
-            {
-              return (index % 2 == 0) 
-                ? const HerMessageBubble()
-                : const MyMessageBubble();
-            }
-          )
+      child: Column
+      (
+        children: 
+        [
+          Expanded
+          (
+            child: ListView.builder
+            (
+              controller: chatProvider.chatScrollControlle,
+              itemCount: chatProvider.messagesList.length,
+              itemBuilder: (context, index)
+              {
+                final message=chatProvider.messagesList[index];
+
+                return ( message.fromWho == FromWho.hers)
+                  ? HerMessageBubble(message: message,)
+                  : MyMessageBubble(message : message);
+              }
+            )
           ),
-          const MessageFieldBox()
+          MessageFieldBox
+          (
+            onValue: (value) => chatProvider.sendMessage(value),
+          )
         ],
       ),
     );
