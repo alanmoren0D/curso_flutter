@@ -21,7 +21,6 @@ class VideoScrollableView extends StatelessWidget {
       itemBuilder: (context, index)
       {
         final VideoPost videoPost = videos[index];
-        // print('${videoPost.videoUrl}------------------------------------------------------------------------------------');
         return Stack(
           children: 
           [
